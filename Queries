@@ -1,0 +1,53 @@
+/* Query 1 - used for first insight */
+select g.name, avg(t.milliseconds)
+from genre g
+join track t
+on g.genreid = t.genreid
+group by 1
+order by 2 desc
+limit 5;
+
+/* Query 2 - used for second insight */
+select c.country, sum(i.total)
+from customer c
+join invoice i
+on c.customerid = i.customerid
+join invoiceline l
+on i.invoiceid = l.invoiceid
+join track t
+on t.trackid = l.trackid
+join genre g
+on g.genreid = t.genreid
+where g.name = 'Electronica/Dance'
+group by 1
+order by 2 desc;
+
+/* Query 3 - used for third insight */
+select a.name, count(t.trackid)
+from Artist a
+join Album ab
+on a.artistid = ab.artistid
+join track t
+on t.albumid = ab.albumid
+join genre g
+on g.genreid = t.genreid
+where g.name = 'Latin'
+group by 1
+order by 2 desc
+limit 3;
+
+/* Query 4 - used for fourth insight */
+select c.customerid, c.firstname, c.lastname, sum(i.total)
+from customer c
+join invoice i
+on c.customerid = i.customerid
+join invoiceline l
+on l.invoiceid = i.invoiceid
+join track t
+on t.trackid = l.trackid
+join genre g
+on g.genreid = t.genreid
+where g.name = 'Classical'
+group by 1
+order by 2 desc
+limit 4;
